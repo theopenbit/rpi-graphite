@@ -6,8 +6,9 @@ mkdir build
 cd build
 git clone -b v1.1.4-4 https://github.com/graphite-project/docker-graphite-statsd.git
 cd docker-graphite-statsd
-basetag=$(docker manifest inspect ubuntu:18.04 | jq -r '.manifests[] | select(.platform.architecture == "arm" and .platform.variant == "v7") | .digest')
-sed -i "1s/.*/FROM ubuntu@$basetag/" Dockerfile
+#basetag=$(docker manifest inspect ubuntu:18.04 | jq -r '.manifests[] | select(.platform.architecture == "arm" and .platform.variant == "v7") | .digest')
+#sed -i "1s/.*/FROM ubuntu@$basetag/" Dockerfile
+sed -i "1s/.*/FROM armhf/ubuntu:17.04/" Dockerfile
 sed -n -i 'p;3a MAINTAINER theOpenbit <tob@schoenesnetz.de>' Dockerfile
 sed -n -i 'p;4a ENV DEBIAN_FRONTEND=noninteractive' Dockerfile
 DOCKER_TAG='latest'
